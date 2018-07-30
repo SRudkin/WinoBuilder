@@ -126,8 +126,30 @@ Function Set-WallPaper($Value)
 
 set-WallPaper -value D:\setup\dino.png
 
+
+
+# Silent Install Crashplan
+# Download URL:https://download.code42.com/installs/win/install/CrashPlan/jre/CrashPlan_4.8.4_Win64.msi
+
+# Download the installer
+Write-Host "Downloading Installer" -ForegroundColor Black
+$source = "https://download.code42.com/installs/win/install/CrashPlan/jre/CrashPlan_4.8.4_Win64.msi"
+$destination = "$workdir\crashplan.exe"
+
+# Check if Invoke-Webrequest exists otherwise execute WebClient
+
+if (Get-Command 'Invoke-Webrequest')
+{
+     Invoke-WebRequest $source -OutFile $destination
+}
+else
+{
+    $WebClient = New-Object System.Net.WebClient
+    $webclient.DownloadFile($source, $destination)
+}
+
 #install crashplan
-Start-Process -FilePath "D:\setup\crashplan.exe" -ArgumentList "/passive"
+Start-Process -FilePath ""$workdir\crashplan.exe" -ArgumentList "/passive"
 # Wait XX Seconds for the installation to finish
 
 Start-Sleep -s 60
