@@ -149,7 +149,7 @@ else
 }
 
 #install crashplan
-Start-Process -FilePath ""$workdir\crashplan.exe" -ArgumentList "/passive"
+Start-Process -FilePath "$workdir\crashplan.exe" -ArgumentList "/passive"
 # Wait XX Seconds for the installation to finish
 
 Start-Sleep -s 60
