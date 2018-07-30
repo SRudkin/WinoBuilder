@@ -141,10 +141,8 @@ Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "SCRNSAVE.EXE" -Value 
 #Set secure lockout
 Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaverIsSecure" -Value 1
 
-Get-BitLockerVolume | Enable-BitLocker -EncryptionMethod Aes128 -RecoveryKeyPath "$env:UserProfile\Desktop\" -RecoveryKeyProtector
-
-
-
+	
+Enable-Bitlocker -MountPoint c: -UsedSpaceOnly -SkipHardwareTest -RecoveryKeyPath "D:\" -RecoveryKeyProtector
 
 #Save Recovery Key to desktop
 (Get-BitLockerVolume -MountPoint C).KeyProtector > $env:UserProfile\Desktop\BitLocker_Recovery_Key.txt
