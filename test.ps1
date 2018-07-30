@@ -55,19 +55,9 @@ Move-Item D:\setup\policies.json -Destination "C:\Program Files\Mozilla Firefox\
 
 Write-Host "Setting up bookmarks" -ForegroundColor Black
 
-
-
-#Silent Install Viscosity
-
-Write-Host "Begining installation for Viscocity" -ForegroundColor Black
-Write-Host "Installating Viscocity" -ForegroundColor Black
-Start-Process -FilePath "D:\setup\viscoscity.exe" /silent
-# Wait XX Seconds for the installation to finish
-
-Start-Sleep -s 60
 Write-Host "Install Vidyo" -ForegroundColor Black
-#Silent Install Vidyo 
 
+#Silent Install Vidyo 
 
 Write-Host "Downloading Installer" -ForegroundColor Black
 #Download URL= https://v.mozilla.com/upload/VidyoDesktopAdminInstaller-win32-TAG_VD_3_6_14_0003.exe
