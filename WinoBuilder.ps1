@@ -1,173 +1,29 @@
- Write-Host "Don't Go Yet, We need some Input from you" -ForegroundColor Red
+Write-Host "Don't Go Yet, We need some Input from you" -ForegroundColor Red
+
+#Imput PC Name
 
 $input = Read-Host "Type the users first initial, users last name - asset tag, I.E srudkin-14297"
- Write-Host "Renaming Computer" -ForegroundColor Black
+Write-Host "Renaming Computer" -ForegroundColor Black
 Rename-Computer -newname $input
-#Policy Enguine
-
-Write-Host "Firefox Installation" -ForegroundColor Black
-# Silent Install Firefox 
-# Download URL: https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US
-
-# Path for the workdir
-$workdir = "c:\installer\"
-
-# Check if work directory exists if not create it
-
-If (Test-Path -Path $workdir -PathType Container)
-{ Write-Host "$workdir already exists" -ForegroundColor Red}
-ELSE
-{ New-Item -Path $workdir  -ItemType directory }
-
-# Download the installer
-Write-Host "Downloading Installer" -ForegroundColor Black
-$source = "https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US"
-$destination = "$workdir\firefox.exe"
-
-# Check if Invoke-Webrequest exists otherwise execute WebClient
-
-if (Get-Command 'Invoke-Webrequest')
-{
-     Invoke-WebRequest $source -OutFile $destination
-}
-else
-{
-    $WebClient = New-Object System.Net.WebClient
-    $webclient.DownloadFile($source, $destination)
-}
-
-# Start the installation
-Write-Host "Starting Installation" -ForegroundColor Black
-Start-Process -FilePath "$workdir\firefox.exe" -ArgumentList "/S"
-
-# Wait XX Seconds for the installation to finish
-Write-Host "Waiting for installation to finish" -ForegroundColor Black
-Start-Sleep -s 35
-
-# Remove the installer
-Write-Host "deleting installer" -ForegroundColor Black
-rm -Force $workdir\firefox*
-
-Write-Host "adding bookmarks" -ForegroundColor Black
-New-Item -Path "C:\Program Files\Mozilla Firefox\distribution"  -ItemType directory
-#creating distruition folder
-Move-Item D:\setup\policies.json -Destination "C:\Program Files\Mozilla Firefox\distribution"
-
-Write-Host "Setting up bookmarks" -ForegroundColor Black
 
 
+#---------------------------------------------------------------------
+#Begin user settings
 
-#Silent Install Viscosity
+#User features and configurations: 
+#Disable Cortana - Line 24
+#Disable Application suggestions and automatic installation - Line 46
+#Disable Location Tracking - Line 65
+#Disable Feedback - Line 76
+#Disable Diagnostics and Tracking - Line 88
+#Enable Firewall - Line 94
+#Enable offering of drivers through Windows Update - Line 102
+#Disable Windows Update automatic restart - Line 112
+#Enable NumLock after startup - Line 123
+#Disable OneDrive - Line 137
+#Uninstall default Microsoft applications - Line 146
+#Screen Lockout - Line 195
 
-Write-Host "Begining installation for Viscocity" -ForegroundColor Black
-Write-Host "Installating Viscocity" -ForegroundColor Black
-Start-Process -FilePath "D:\setup\viscoscity.exe" /silent
-# Wait XX Seconds for the installation to finish
-
-Start-Sleep -s 60
-Write-Host "Install Vidyo" -ForegroundColor Black
-#Silent Install Vidyo 
-
-
-Write-Host "Downloading Installer" -ForegroundColor Black
-#Download URL= https://v.mozilla.com/upload/VidyoDesktopAdminInstaller-win32-TAG_VD_3_6_14_0003.exe
-# Path for the workdir
-$workdir = "c:\installer\"
-
-# Check if work directory exists if not create it
-
-If (Test-Path -Path $workdir -PathType Container)
-{ Write-Host "$workdir already exists" -ForegroundColor Red}
-ELSE
-{ New-Item -Path $workdir  -ItemType directory }
-
-# Download the installer
-
-$source = "https://v.mozilla.com/upload/VidyoDesktopAdminInstaller-win32-TAG_VD_3_6_14_0003.exe" 
-$destination = "$workdir\vidyo.exe"
-
-# Check if Invoke-Webrequest exists otherwise execute WebClient
-
-if (Get-Command 'Invoke-Webrequest')
-{
-     Invoke-WebRequest $source -OutFile $destination
-}
-else
-{
-    $WebClient = New-Object System.Net.WebClient
-    $webclient.DownloadFile($source, $destination)
-}
-
-# Start the installation
-Write-Host "Starting Installation" -ForegroundColor Black
-Start-Process -FilePath "$workdir\vidyo.exe" -ArgumentList "/S"
-# Wait XX Seconds for the installation to finish
-
-Start-Sleep -s 60
-
-# Remove the installer
-Write-Host "deleting installer" -ForegroundColor Black
-rm -Force $workdir\vidyo*
-
-#Set Desktop background to Dino
-
-#Create function to set wallpaper 
-Write-Host "Setting Desktop Background" -ForegroundColor Black
-Function Set-WallPaper($Value)
-
-{
-
- Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name wallpaper -value $value
-
- rundll32.exe user32.dll, UpdatePerUserSystemParameters
-
-}
-
-
-set-WallPaper -value D:\setup\dino.png
-
-
-
-# Silent Install Crashplan
-# Download URL:https://download.code42.com/installs/win/install/CrashPlan/jre/CrashPlan_4.8.4_Win64.msi
-
-# Download the installer
-Write-Host "Downloading Installer" -ForegroundColor Black
-$source = "https://download.code42.com/installs/win/install/CrashPlan/jre/CrashPlan_4.8.4_Win64.msi"
-$destination = "$workdir\crashplan.exe"
-
-# Check if Invoke-Webrequest exists otherwise execute WebClient
-
-if (Get-Command 'Invoke-Webrequest')
-{
-     Invoke-WebRequest $source -OutFile $destination
-}
-else
-{
-    $WebClient = New-Object System.Net.WebClient
-    $webclient.DownloadFile($source, $destination)
-}
-
-#install crashplan
-Start-Process -FilePath "$workdir\crashplan.exe" -ArgumentList "/passive"
-# Wait XX Seconds for the installation to finish
-
-Start-Sleep -s 60
-
-#Set screen lockout
-Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaveActive" -Value 1
-#Set Screen saver lockout timer
-Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaveTimeOut" -value 1200
-#Set Screen saver image
-Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "SCRNSAVE.EXE" -Value ""
-#Set secure lockout
-Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaverIsSecure" -Value 1
-
-	
-Enable-Bitlocker -MountPoint c: -UsedSpaceOnly -SkipHardwareTest -RecoveryKeyPath "D:\" -RecoveryKeyProtector
-
-#Save Recovery Key to desktop
-(Get-BitLockerVolume -MountPoint C).KeyProtector > $env:UserProfile\Desktop\BitLocker_Recovery_Key.txt
 
 # Disable Cortana
 Function DisableCortana {
@@ -333,5 +189,152 @@ Function UninstallMsftBloat {
 	Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
 	Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
 }
+
+
+#Set screen lockout
+Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaveActive" -Value 1
+#Set Screen saver lockout timer
+Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaveTimeOut" -value 1200
+#Set Screen saver image
+Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "SCRNSAVE.EXE" -Value ""
+#Set secure lockout
+Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaverIsSecure" -Value 1
+
+
+#End User Configuration
+#-------------------------------------------------------------------------------------------------------------------
+
+#Begin application installations
+# Path for the workdirectory where the installers will be downloaded and executed from
+# The workflow is download installer to C:\installer\, execute installer silently, delete installer
+# Applications included are firefox, crashplan and vidyo
+
+$workdir = "c:\installer\"
+
+# Check if work directory exists if not create it
+
+If (Test-Path -Path $workdir -PathType Container)
+{ Write-Host "$workdir already exists" -ForegroundColor Red}
+ELSE
+{ New-Item -Path $workdir  -ItemType directory }
+
+Write-Host "Firefox Installation" -ForegroundColor Black
+# Silent Install Firefox 
+# Download URL: https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US
+# Download the installer
+Write-Host "Downloading Installer" -ForegroundColor Black
+$source = "https://download.mozilla.org/?product=firefox-latest&os=win64&lang=en-US"
+$destination = "$workdir\firefox.exe"
+
+# Check if Invoke-Webrequest exists otherwise execute WebClient
+
+if (Get-Command 'Invoke-Webrequest')
+{
+     Invoke-WebRequest $source -OutFile $destination
+}
+else
+{
+    $WebClient = New-Object System.Net.WebClient
+    $webclient.DownloadFile($source, $destination)
+}
+
+# Start the installation
+Write-Host "Starting Installation" -ForegroundColor Black
+Start-Process -FilePath "$workdir\firefox.exe" -ArgumentList "/S"
+
+# Remove the installer
+Write-Host "deleting installer" -ForegroundColor Black
+rm -Force $workdir\firefox*
+
+#Add bookmarks from policies.json
+Write-Host "adding bookmarks" -ForegroundColor Black
+New-Item -Path "C:\Program Files\Mozilla Firefox\distribution"  -ItemType directory
+#creating distruition folder
+Copy-Item D:\setup\policies.json -Destination "C:\Program Files\Mozilla Firefox\distribution"
+
+#Silent Install Vidyo 
+Write-Host "Downloading Vidyo Installer" -ForegroundColor Black
+#Download URL= https://v.mozilla.com/upload/VidyoDesktopAdminInstaller-win32-TAG_VD_3_6_14_0003.exe
+
+# Download the installer
+$source = "https://v.mozilla.com/upload/VidyoDesktopAdminInstaller-win32-TAG_VD_3_6_14_0003.exe" 
+$destination = "$workdir\vidyo.exe"
+
+# Check if Invoke-Webrequest exists otherwise execute WebClient
+
+if (Get-Command 'Invoke-Webrequest')
+{
+     Invoke-WebRequest $source -OutFile $destination
+}
+else
+{
+    $WebClient = New-Object System.Net.WebClient
+    $webclient.DownloadFile($source, $destination)
+}
+
+# Start the installation
+Write-Host "Starting Installation" -ForegroundColor Black
+Start-Process -FilePath "$workdir\vidyo.exe" -ArgumentList "/S"
+
+# Remove the installer
+Write-Host "Deleting Vidyo Installer" -ForegroundColor Black
+rm -Force $workdir\vidyo*
+
+#Set Desktop background to Dino
+
+#Create function to set wallpaper 
+Write-Host "Setting Desktop Background" -ForegroundColor Black
+
+Function Set-WallPaper($Value)
+
+{
+
+ Set-ItemProperty -path 'HKCU:\Control Panel\Desktop\' -name wallpaper -value $value
+
+ rundll32.exe user32.dll, UpdatePerUserSystemParameters
+
+}
+set-WallPaper -value D:\setup\dino.png
+
+# Silent Install Crashplan
+# Download URL:https://download.code42.com/installs/win/install/CrashPlan/jre/CrashPlan_4.8.4_Win64.msi
+
+# Download the installer
+Write-Host "Downloading Installer" -ForegroundColor Black
+$source = "https://download.code42.com/installs/win/install/CrashPlan/jre/CrashPlan_4.8.4_Win64.msi"
+$destination = "$workdir\crashplan.exe"
+
+# Check if Invoke-Webrequest exists otherwise execute WebClient
+
+if (Get-Command 'Invoke-Webrequest')
+{
+     Invoke-WebRequest $source -OutFile $destination
+}
+else
+{
+    $WebClient = New-Object System.Net.WebClient
+    $webclient.DownloadFile($source, $destination)
+}
+
+#install crashplan
+Start-Process -FilePath "$workdir\crashplan.exe" -ArgumentList "/passive"
+
+
+# Remove the installer
+Write-Host "deleting crashplan installer" -ForegroundColor Black
+rm -Force $workdir\crashplan*
+
+#End Application installations
+#------------------------------------------------------------------------------
+#Begin Bitlocker - GPU 
+
+#Enable Bitlocker
+Enable-Bitlocker -MountPoint c: -UsedSpaceOnly -SkipHardwareTest -RecoveryKeyPath "D:\" -RecoveryKeyProtector
+
+#Add Batfle to Startup Folder
+
+Copy-Item "D:\setup\recoverykey.bat" -Destination "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
+
+
 
 
