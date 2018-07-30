@@ -132,6 +132,14 @@ Start-Process -FilePath "D:\setup\crashplan.exe" -ArgumentList "/passive"
 
 Start-Sleep -s 60
 
+#Set screen lockout
+Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaveActive" -Value 1
+#Set Screen saver lockout timer
+Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaveTimeOut" -value 1200
+#Set Screen saver image
+Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "SCRNSAVE.EXE" -Value ""
+#Set secure lockout
+Set-ItemProperty -Path "hkcu:control panel\desktop" -Name "ScreenSaverIsSecure" -Value 1
 
 
 
