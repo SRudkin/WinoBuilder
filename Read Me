@@ -1,7 +1,4 @@
-To run the tool download both, test.ps1, policies.json and firefox configuration.bat
-download the appropriate version of viscoscity, crashplan and the dino image
-Move all 6 items to a flashdrive or disk D: 
-rename the .exes to viscoscity , crashplan , dino.png
+To run the tool download the following from the repository, Winobuilder.ps1, policies.json, copykey.ps1, recoverykey.bat and firefox configuration.bat
 Setup an account on the windows machine as usual. Make sure your connected to a wireless network
 Run the "firefox configuration.bat" file, it will ask you if powershell is allowed to make changes to the machine. say yes
 Enter in the pc name into powershell when promted 
