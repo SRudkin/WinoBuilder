@@ -219,10 +219,12 @@ else
     $WebClient = New-Object System.Net.WebClient
     $webclient.DownloadFile($source, $destination)
 }
+sleep 30
 
 # Start the installation
 Write-Host "Starting Installation" -ForegroundColor Black
 Start-Process -FilePath "$workdir\firefox.exe" -ArgumentList "/S"
+sleep 30
 
 # Remove the installer
 Write-Host "deleting installer" -ForegroundColor Black
@@ -233,6 +235,7 @@ Write-Host "adding bookmarks" -ForegroundColor Black
 New-Item -Path "C:\Program Files\Mozilla Firefox\distribution"  -ItemType directory
 #creating distruition folder
 Copy-Item D:\setup\policies.json -Destination "C:\Program Files\Mozilla Firefox\distribution"
+sleep 30
 
 #Silent Install Vidyo 
 Write-Host "Downloading Vidyo Installer" -ForegroundColor Black
@@ -253,10 +256,12 @@ else
     $WebClient = New-Object System.Net.WebClient
     $webclient.DownloadFile($source, $destination)
 }
+sleep 30
 
 # Start the installation
 Write-Host "Starting Installation" -ForegroundColor Black
 Start-Process -FilePath "$workdir\vidyo.exe" -ArgumentList "/S"
+sleep 30
 
 # Remove the installer
 Write-Host "Deleting Vidyo Installer" -ForegroundColor Black
@@ -298,10 +303,11 @@ else
     $WebClient = New-Object System.Net.WebClient
     $webclient.DownloadFile($source, $destination)
 }
+sleep 30
 
 #install crashplan
 Start-Process -FilePath "$workdir\crashplan.exe" -ArgumentList "/passive"
-
+sleep 30
 
 # Remove the installer
 Write-Host "deleting crashplan installer" -ForegroundColor Black
