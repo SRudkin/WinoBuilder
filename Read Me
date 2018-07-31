@@ -1,6 +1,14 @@
-To run the tool download the following from the repository, Winobuilder.ps1, policies.json, copykey.ps1, recoverykey.bat and firefox configuration.bat
-Setup an account on the windows machine as usual. Make sure your connected to a wireless network
-Run the "firefox configuration.bat" file, it will ask you if powershell is allowed to make changes to the machine. say yes
-Enter in the pc name into powershell when promted 
-walk away for a bit
-come back and be amazed! 
+To run the tool please download entire repository
+Create a file on your flashdrive called "setup" 
+Unzip repository into the setup folder you just created
+
+On the new PC ->
+Connect to mozilla guest
+run "firefox configuration.bat" 
+Accept the prompt or hit yes
+enter in the computer name
+hit enter
+walk away for about 6 minutes
+come back and enter the recovery password for bitlocker into WDE
+hit enter
+Done
