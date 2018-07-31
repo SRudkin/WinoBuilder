@@ -285,12 +285,12 @@ Function Set-WallPaper($Value)
 set-WallPaper -value D:\setup\dino.png
 
 # Silent Install Crashplan
-# Download URL:https://download.code42.com/installs/win/install/CrashPlan/jre/CrashPlan_4.8.4_Win64.msi
+# Download URL:https://download.code42.com/installs/win/install/Code42CrashPlan/jre/Code42CrashPlan_6.7.2_Win64.msi
 
 # Download the installer
 Write-Host "Downloading Installer" -ForegroundColor Black
-$source = "https://download.code42.com/installs/win/install/CrashPlan/jre/CrashPlan_4.8.4_Win64.msi"
-$destination = "$workdir\crashplan.exe"
+$source = "https://download.code42.com/installs/win/install/Code42CrashPlan/jre/Code42CrashPlan_6.7.2_Win64.msi"
+$destination = "$workdir\crashplan.msi"
 
 # Check if Invoke-Webrequest exists otherwise execute WebClient
 
@@ -306,7 +306,7 @@ else
 sleep 30
 
 #install crashplan
-Start-Process -FilePath "$workdir\crashplan.exe" -ArgumentList "/passive"
+Start-Process -FilePath "$workdir\crashplan.msi" -ArgumentList "/passive"
 sleep 30
 
 # Remove the installer
@@ -318,7 +318,7 @@ rm -Force $workdir\crashplan*
 #Begin Bitlocker - GPU 
 
 #Enable Bitlocker
-Enable-Bitlocker -MountPoint c: -UsedSpaceOnly -SkipHardwareTest -RecoveryKeyPath "C:\" -RecoveryKeyProtector
+Enable-Bitlocker -MountPoint c: -UsedSpaceOnly -SkipHardwareTest
 
 #Add Batfle to Startup Folder
 
