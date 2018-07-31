@@ -1,4 +1,0 @@
-To do: 
-Change the installers from needing to be on the flash drive to downloading from the internet, should be simple once I find the permalinks
-add a bitlocker enable and have it enable and encrypt "Bitlocker" automatically and have it save the recovery key to an external source (TBD by sercurity)
-Make it set PC to need password immidiatly after going to sleep and have it sleep or lock after 15 minutes of inactivity
