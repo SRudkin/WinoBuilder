@@ -318,7 +318,7 @@ rm -Force $workdir\crashplan*
 #Begin Bitlocker - GPU 
 
 #Enable Bitlocker
-Enable-Bitlocker -MountPoint c: -UsedSpaceOnly -SkipHardwareTest -RecoveryKeyPath "D:\" -RecoveryKeyProtector
+Enable-Bitlocker -MountPoint c: -UsedSpaceOnly -SkipHardwareTest -RecoveryKeyPath "C:\" -RecoveryKeyProtector
 
 #Add Batfle to Startup Folder
 
