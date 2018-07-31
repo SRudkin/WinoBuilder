@@ -272,7 +272,8 @@ rm -Force $workdir\vidyo*
 
 #Create function to set wallpaper 
 Write-Host "Setting Desktop Background" -ForegroundColor Black
-
+Rename-Item -Path "D:/setup/dino-wallpaper.png" -NewName "Dino.png" 
+Copy-Item -Path "D:/setup/dino.png" -destination "c:/installer/"
 Function Set-WallPaper($Value)
 
 {
@@ -282,7 +283,7 @@ Function Set-WallPaper($Value)
  rundll32.exe user32.dll, UpdatePerUserSystemParameters
 
 }
-set-WallPaper -value D:\setup\dino.png
+set-WallPaper -value "C:/installer/dino.png"
 
 # Silent Install Crashplan
 # Download URL:https://download.code42.com/installs/win/install/Code42CrashPlan/jre/Code42CrashPlan_6.7.2_Win64.msi
