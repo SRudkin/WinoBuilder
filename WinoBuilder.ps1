@@ -319,7 +319,7 @@ rm -Force $workdir\crashplan*
 #Begin Bitlocker - GPU 
 
 #Enable Bitlocker
-Enable-Bitlocker -MountPoint c: -UsedSpaceOnly -SkipHardwareTest
+Copy-Item "D:\setup\recoverykey.bat" -Destination "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
 
 #Add Batfle to Startup Folder
 
