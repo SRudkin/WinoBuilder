@@ -264,6 +264,7 @@ rm -Force $workdir\vidyo*
 
 #Set Desktop background to Dino
 
+
 #Create function to set wallpaper 
 Write-Host "Setting Desktop Background" -ForegroundColor Black
 
@@ -317,6 +318,10 @@ Enable-Bitlocker -MountPoint c: -UsedSpaceOnly -SkipHardwareTest -RecoveryKeyPat
 
 Copy-Item "D:\setup\recoverykey.bat" -Destination "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup"
 
+Read-Host "Press Enter to Continue to reboot"
+Write-Host "continueing" -ForegroundColor Black
+
+Restart-Computer
 
 
 
